@@ -1,48 +1,532 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AKER GLOBAL</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aker Global | Lojistik, Depolama ve Distribütörlük</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0a09;
+    --bg-alt: #141210;
+    --panel: #1b1815;
+    --gold: #c9a24a;
+    --gold-light: #e8cd85;
+    --gold-dim: #8a6f34;
+    --cream: #f2ead9;
+    --cream-dim: #b7ac97;
+    --line: rgba(201,162,74,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.32em;
+    font-size:0.72rem;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 48px;
+    background:linear-gradient(to bottom, rgba(11,10,9,0.9), transparent);
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(11,10,9,0.92);
+    backdrop-filter:blur(10px);
+    padding:16px 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;
+    letter-spacing:0.08em;
+    color:var(--cream);
+  }
+  .logo span{color:var(--gold);}
+  nav ul{display:flex;gap:40px;list-style:none;}
+  nav a{
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--cream-dim);
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a:hover{color:var(--gold-light);}
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--gold);transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;}
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:140px 24px 80px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(201,162,74,0.10), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    overflow:hidden;
+  }
+  .hero-deer{
+    position:absolute;
+    top:50%;left:50%;
+    width:min(1100px, 150vw);
+    transform:translate(-50%,-46%);
+    opacity:0.10;
+    pointer-events:none;
+  }
+  .hero-deer path,.hero-deer line{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.1;
+  }
+  .hero-content{position:relative;z-index:2;max-width:760px;}
+  .hero .eyebrow{display:block;margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6.5vw, 5.2rem);
+    line-height:1.05;
+    color:var(--cream);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-light);
+  }
+  .hero-sub{
+    margin:26px auto 0;
+    max-width:560px;
+    color:var(--cream-dim);
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+  .hero-cta{
+    margin-top:44px;
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:15px 34px;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    border:1px solid var(--gold);
+    transition:all .3s ease;
+  }
+  .btn-solid{
+    background:var(--gold);
+    color:var(--bg);
+  }
+  .btn-solid:hover{background:var(--gold-light);border-color:var(--gold-light);}
+  .btn-ghost{color:var(--cream);}
+  .btn-ghost:hover{background:rgba(201,162,74,0.1);color:var(--gold-light);}
+
+  .scroll-cue{
+    position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
+    width:1px;height:56px;
+    background:linear-gradient(to bottom, transparent, var(--gold));
+    z-index:2;
+  }
+  .scroll-cue::after{
+    content:'';position:absolute;bottom:0;left:-2.5px;width:6px;height:6px;
+    border-radius:50%;background:var(--gold-light);
+    animation:driptrail 2.2s ease-in-out infinite;
+  }
+  @keyframes driptrail{0%{bottom:0;opacity:0;}30%{opacity:1;}100%{bottom:56px;opacity:0;}}
+
+  section{padding:120px 0;position:relative;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 64px;}
+  .section-head .eyebrow{display:block;margin-bottom:16px;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem);color:var(--cream);}
+  .section-head p{color:var(--cream-dim);margin-top:16px;line-height:1.7;font-size:0.98rem;}
+  .divider{
+    width:64px;height:1px;background:var(--gold-dim);
+    margin:20px auto 0;
+  }
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .services{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+  }
+  .service-item{
+    padding:56px 40px;
+    text-align:center;
+    border-right:1px solid var(--line);
+  }
+  .service-item:last-child{border-right:none;}
+  .service-icon{
+    width:44px;height:44px;margin:0 auto 20px;
+  }
+  .service-icon svg{width:100%;height:100%;stroke:var(--gold);fill:none;stroke-width:1.1;}
+  .service-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:0.85rem;
+    color:var(--gold-dim);
+    letter-spacing:0.3em;
+    margin-bottom:14px;
+    display:block;
+  }
+  .service-item h3{font-size:1.5rem;color:var(--cream);margin-bottom:12px;}
+  .service-item p{color:var(--cream-dim);font-size:0.9rem;line-height:1.65;}
+
+  .story{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .story-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    background:var(--panel);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .story-visual svg{width:46%;opacity:0.85;}
+  .story-visual::before{
+    content:'';position:absolute;inset:14px;
+    border:1px solid var(--gold-dim);
+    pointer-events:none;
+  }
+  .story-text .eyebrow{display:block;margin-bottom:18px;}
+  .story-text h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--cream);margin-bottom:22px;}
+  .story-text p{color:var(--cream-dim);line-height:1.8;font-size:0.98rem;margin-bottom:16px;}
+  .story-stats{display:flex;gap:48px;margin-top:36px;flex-wrap:wrap;}
+  .story-stats div strong{
+    display:block;font-family:'Cormorant Garamond',serif;
+    font-size:2.2rem;color:var(--gold-light);
+  }
+  .story-stats div span{font-size:0.78rem;letter-spacing:0.08em;color:var(--cream-dim);text-transform:uppercase;}
+
+  .portfolio{background:var(--bg-alt);}
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .portfolio-card{
+    background:var(--bg-alt);
+    padding:56px 34px;
+    text-align:center;
+    transition:background .3s ease;
+  }
+  .portfolio-card:hover{background:var(--panel);}
+  .portfolio-tag{
+    font-size:0.7rem;text-transform:uppercase;letter-spacing:0.16em;
+    color:var(--gold-dim);margin-bottom:14px;display:block;
+  }
+  .portfolio-card h3{font-size:1.5rem;color:var(--cream);margin-bottom:12px;}
+  .portfolio-card p{color:var(--cream-dim);font-size:0.88rem;line-height:1.6;}
+  .portfolio-card.future{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:1px dashed var(--gold-dim);
+  }
+  .portfolio-card.future h3{color:var(--gold-dim);}
+
+  .audience-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+  }
+  .audience-item{
+    text-align:center;
+    padding:38px 20px;
+    border:1px solid var(--line);
+  }
+  .audience-item svg{width:34px;height:34px;stroke:var(--gold-dim);fill:none;stroke-width:1.2;margin-bottom:16px;}
+  .audience-item h4{font-size:1rem;color:var(--cream);font-weight:400;letter-spacing:0.02em;}
+
+  .cta-band{
+    background:var(--panel);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:center;
+    padding:100px 24px;
+  }
+  .cta-band .eyebrow{display:block;margin-bottom:18px;}
+  .cta-band h2{font-size:clamp(1.9rem,4vw,2.6rem);color:var(--cream);max-width:640px;margin:0 auto 34px;}
+
+  footer{padding:70px 0 36px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:48px;
+    padding-bottom:48px;
+    border-bottom:1px solid var(--line);
+  }
+  .footer-brand .logo{margin-bottom:16px;display:block;}
+  .footer-brand p{color:var(--cream-dim);font-size:0.88rem;line-height:1.7;max-width:280px;}
+  .footer-col h5{
+    font-size:0.75rem;text-transform:uppercase;letter-spacing:0.16em;
+    color:var(--gold);margin-bottom:20px;font-weight:500;
+  }
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:12px;}
+  .footer-col a{color:var(--cream-dim);font-size:0.9rem;transition:color .2s;}
+  .footer-col a:hover{color:var(--gold-light);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:28px;flex-wrap:wrap;gap:12px;
+  }
+  .footer-bottom p{color:var(--cream-dim);font-size:0.8rem;}
+
+  @media (max-width:900px){
+    header{padding:18px 24px;}
+    nav ul{display:none;}
+    .nav-toggle{display:block;}
+    .story{grid-template-columns:1fr;gap:44px;}
+    .services-grid{grid-template-columns:1fr;}
+    .service-item{border-right:none;border-bottom:1px solid var(--line);}
+    .service-item:last-child{border-bottom:none;}
+    .portfolio-grid{grid-template-columns:1fr;}
+    .audience-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .audience-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-cta{flex-direction:column;align-items:center;}
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="images/logo.png" alt="AKER GLOBAL">
-    </div>
-    <nav>
-      <a href="index.html">Ana Sayfa</a>
-      <a href="urunler.html">Ürünler</a>
-      <a href="hakkimizda.html">Hakkımızda</a>
-      <a href="iletisim.html">İletişim</a>
-    </nav>
-  </header>
+<header id="siteHeader">
+  <a href="#" class="logo">AKER <span>GLOBAL</span></a>
+  <nav>
+    <ul>
+      <li><a href="#anasayfa">Ana Sayfa</a></li>
+      <li><a href="#hizmetler">Hizmetlerimiz</a></li>
+      <li><a href="#hakkimizda">Hakkımızda</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-label="Menü">&#9776;</button>
+</header>
 
-  <section class="hero">
-    <h1>AKER GLOBAL</h1>
-    <p>Kafeler, oteller, marketler ve bireysel müşteriler için özenle seçilmiş kahve tedariki.</p>
-  </section>
+<section class="hero" id="anasayfa">
+  <svg class="hero-deer" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+    <path d="M300 480 L300 300 M300 300 L250 200 M300 300 L350 200"/>
+    <path d="M250 200 C 230 160, 200 150, 170 120 M250 200 C 240 150, 260 120, 240 80"/>
+    <path d="M350 200 C 370 160, 400 150, 430 120 M350 200 C 360 150, 340 120, 360 80"/>
+    <path d="M230 340 C 180 330, 140 300, 110 340 M370 340 C 420 330, 460 300, 490 340"/>
+    <path d="M300 300 C 290 250, 292 230, 300 210 C 308 230, 310 250, 300 300 Z"/>
+    <circle cx="300" cy="235" r="3"/>
+  </svg>
+  <div class="hero-content">
+    <span class="eyebrow">Aker Global</span>
+    <h1>Marmara'nın Güvenilir <em>Lojistik</em> ve Dağıtım Ortağı</h1>
+    <p class="hero-sub">Depolama, taşımacılık ve distribütörlük hizmetlerimizle markaları doğru zamanda, doğru yerde buluşturuyoruz. Marmara Bölgesi'nde Venado'nun yetkili distribütörüyüz.</p>
+    <div class="hero-cta">
+      <a href="#hizmetler" class="btn btn-solid">Hizmetlerimiz</a>
+      <a href="#iletisim" class="btn btn-ghost">Bizimle Çalışın</a>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
 
-  <section class="highlights">
-    <div class="highlight-item">
-      <h3>Kafe & Restoran</h3>
-      <p>İşletmenize özel kahve çözümleri.</p>
+<section class="services reveal" id="hizmetler">
+  <div class="wrap services-grid">
+    <div class="service-item">
+      <span class="service-num">01</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M6 18 24 8l18 10v20a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V18Z"/><path d="M16 40V24h16v16"/></svg>
+      </div>
+      <h3>Depolama</h3>
+      <p>Modern raf sistemleri ve 7/24 güvenlik ile ürünleriniz emin ellerde saklanır.</p>
     </div>
-    <div class="highlight-item">
-      <h3>Otel & Market</h3>
-      <p>Toplu tedarik ve süreklilik.</p>
+    <div class="service-item">
+      <span class="service-num">02</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M4 32V14h24v18"/><path d="M28 22h10l6 8v6a2 2 0 0 1-2 2h-2"/><circle cx="14" cy="38" r="4"/><circle cx="36" cy="38" r="4"/></svg>
+      </div>
+      <h3>Taşımacılık</h3>
+      <p>Geniş araç filomuz ve uzman şoför kadromuzla zamanında, güvenli teslimat.</p>
     </div>
-    <div class="highlight-item">
-      <h3>Bireysel</h3>
-      <p>Evinize kaliteli kahve deneyimi.</p>
+    <div class="service-item">
+      <span class="service-num">03</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 7v34 M7 24h34"/><path d="M24 7c6 5 9 11 9 17s-3 12-9 17 M24 7c-6 5-9 11-9 17s3 12 9 17"/></svg>
+      </div>
+      <h3>Distribütörlük</h3>
+      <p>Marmara Bölgesi'nde markaların satış ve dağıtım ağını yönetiyoruz.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2026 AKER GLOBAL. Tüm hakları saklıdır.</p>
-  </footer>
+<section id="hakkimizda">
+  <div class="wrap story reveal">
+    <div class="story-visual">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" stroke="var(--gold)" stroke-width="1.2" fill="none">
+        <path d="M100 170 L100 90 M100 90 L75 55 M100 90 L125 55"/>
+        <path d="M75 55 C 65 35, 50 30, 35 15 M75 55 C 70 30, 82 15, 72 -5"/>
+        <path d="M125 55 C 135 35, 150 30, 165 15 M125 55 C 130 30, 118 15, 128 -5"/>
+        <ellipse cx="100" cy="90" rx="4" ry="4"/>
+      </svg>
+    </div>
+    <div class="story-text">
+      <span class="eyebrow">Hakkımızda</span>
+      <h2>Depolamadan dağıtıma,<br>Marmara'nın güvenilir adresi.</h2>
+      <p>Aker Global olarak Marmara Bölgesi'nde lojistik, depolama ve distribütörlük hizmetleri sunuyoruz. Şu anda Venado markasının bölgesel distribütörlüğünü yürütüyoruz.</p>
+      <p>Hedefimiz büyümek: güçlü depolama altyapımız ve lojistik ağımızla önümüzdeki dönemde portföyümüze yeni marka distribütörlükleri eklemek istiyoruz.</p>
+      <div class="story-stats">
+        <div><strong>Marmara</strong><span>Bölgesi</span></div>
+        <div><strong>7/24</strong><span>Güvenlik</span></div>
+        <div><strong>+1</strong><span>Büyüyen Portföy</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Marka Portföyümüz</span>
+      <h2>Distribütörlüğünü Yaptığımız Markalar</h2>
+      <p>Marmara Bölgesi'nde temsil ettiğimiz markalar ve büyüyen portföyümüz.</p>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-card">
+        <span class="portfolio-tag">Marmara Distribütörü</span>
+        <h3>Venado</h3>
+        <p>Venado markasının Marmara Bölgesi'ndeki yetkili distribütörüyüz.</p>
+      </div>
+      <div class="portfolio-card future">
+        <span class="portfolio-tag">Yakında</span>
+        <h3>Yeni Distribütörlükler</h3>
+        <p>Portföyümüzü büyütmeye devam ediyoruz.</p>
+      </div>
+      <div class="portfolio-card future">
+        <span class="portfolio-tag">İş Birliği</span>
+        <h3>Sizin Markanız mı?</h3>
+        <p>Marmara'da güçlü bir distribütörlük ortağı arıyorsanız bizimle iletişime geçin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kimlere Hizmet Veriyoruz</span>
+      <h2>İş Ortaklarımız</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="audience-item">
+        <svg viewBox="0 0 48 48"><path d="M10 20h28v6a14 14 0 0 1-14 14 14 14 0 0 1-14-14v-6Z"/><path d="M38 22h4a4 4 0 0 1 0 8h-4"/><path d="M16 12v6 M24 12v6 M32 12v6"/></svg>
+        <h4>Kafeler</h4>
+      </div>
+      <div class="audience-item">
+        <svg viewBox="0 0 48 48"><path d="M8 42V18l16-10 16 10v24"/><path d="M8 42h32"/><path d="M20 42V28h8v14"/></svg>
+        <h4>Oteller</h4>
+      </div>
+      <div class="audience-item">
+        <svg viewBox="0 0 48 48"><path d="M8 16h32l-3 22H11L8 16Z"/><path d="M6 16 8 8h32l2 8"/><path d="M18 22v10 M30 22v10"/></svg>
+        <h4>Marketler</h4>
+      </div>
+      <div class="audience-item">
+        <svg viewBox="0 0 48 48"><rect x="8" y="16" width="24" height="20" rx="1"/><path d="M32 22h8v14h-8" /><circle cx="16" cy="40" r="2.4"/><circle cx="34" cy="40" r="2.4"/></svg>
+        <h4>Toptancılar</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band reveal" id="isbirligi">
+  <span class="eyebrow">İş Birliği</span>
+  <h2>Markanızı Marmara'da büyütmek için doğru ortağı arıyorsanız, konuşalım.</h2>
+  <a href="#iletisim" class="btn btn-solid">Bizimle Çalışın</a>
+</section>
+
+<footer id="iletisim">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">AKER <span>GLOBAL</span></a>
+        <p>Marmara Bölgesi'nde lojistik, depolama ve distribütörlük hizmetleri sunuyoruz.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Kurumsal</h5>
+        <ul>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#hizmetler">Hizmetlerimiz</a></li>
+          <li><a href="#isbirligi">İş Birliği</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>İletişim</h5>
+        <ul>
+          <li><a href="tel:+900000000000">0 (000) 000 00 00</a></li>
+          <li><a href="mailto:info@akerglobal.com">info@akerglobal.com</a></li>
+          <li><a href="#">Marmara Bölgesi, Türkiye</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Sosyal Medya</h5>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aker Global. Tüm hakları saklıdır.</p>
+      <p>Venado Marmara Bölgesi Yetkili Distribütörü</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  reveals.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
