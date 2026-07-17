@@ -324,6 +324,72 @@
     .footer-grid{grid-template-columns:1fr;}
     .hero-cta{flex-direction:column;align-items:center;}
   }
+
+  /* ---------- APPLICATION FORM MODAL ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(6,5,4,0.82);
+    backdrop-filter:blur(4px);
+    align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    position:relative;
+    width:100%;max-width:520px;
+    max-height:88vh;
+    overflow-y:auto;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    padding:44px 36px;
+  }
+  .modal-close{
+    position:absolute;top:18px;right:18px;
+    background:none;border:none;
+    color:var(--cream-dim);
+    font-size:1.6rem;line-height:1;
+    cursor:pointer;
+  }
+  .modal-close:hover{color:var(--gold-light);}
+  .modal-box h3{font-size:1.7rem;color:var(--cream);margin-bottom:8px;}
+  .modal-box .modal-sub{color:var(--cream-dim);font-size:0.9rem;margin-bottom:28px;line-height:1.6;}
+  .form-group{margin-bottom:18px;}
+  .form-group label{
+    display:block;font-size:0.72rem;text-transform:uppercase;
+    letter-spacing:0.12em;color:var(--gold);margin-bottom:8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea{
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:12px 14px;
+    font-family:'Jost',sans-serif;
+    font-size:0.92rem;
+    outline:none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus{border-color:var(--gold);}
+  .form-group textarea{resize:vertical;min-height:90px;}
+  .form-submit{
+    width:100%;
+    background:var(--gold);
+    color:var(--bg);
+    border:1px solid var(--gold);
+    padding:15px;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    cursor:pointer;
+    margin-top:8px;
+    transition:background .3s ease;
+  }
+  .form-submit:hover{background:var(--gold-light);}
+  .form-status{margin-top:16px;font-size:0.88rem;text-align:center;}
 </style>
 </head>
 <body>
@@ -388,7 +454,7 @@
     <p class="hero-sub">Depolama, taşımacılık ve distribütörlük hizmetlerimizle markaları doğru zamanda, doğru yerde buluşturuyoruz. Marmara Bölgesi'nde Venado Coffee'nin yetkili distribütörüyüz.</p>
     <div class="hero-cta">
       <a href="#hizmetler" class="btn btn-solid">Hizmetlerimiz</a>
-      <a href="#iletisim" class="btn btn-ghost">Bizimle Çalışın</a>
+      <a href="javascript:void(0)" onclick="openBasvuruForm()" class="btn btn-ghost">Bizimle Çalışın</a>
     </div>
   </div>
   <div class="scroll-cue"></div>
@@ -409,7 +475,7 @@
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><path d="M4 32V14h24v18"/><path d="M28 22h10l6 8v6a2 2 0 0 1-2 2h-2"/><circle cx="14" cy="38" r="4"/><circle cx="36" cy="38" r="4"/></svg>
       </div>
-      <h3>Taşımacılık</h3>
+      <h3>Lojistik</h3>
       <p>Geniş araç filomuz ve uzman şoför kadromuzla zamanında, güvenli teslimat.</p>
     </div>
     <div class="service-item">
@@ -501,9 +567,9 @@
 </section>
 
 <section class="cta-band reveal" id="isbirligi">
-  <span class="eyebrow">İş Birliği</span>
-  <h2>Markanızı Marmara'da büyütmek için doğru ortağı arıyorsanız, konuşalım.</h2>
-  <a href="#iletisim" class="btn btn-solid">Bizimle Çalışın</a>
+  <span class="eyebrow">Bizimle Çalışın</span>
+  <h2>Marka distribütörlüğü teklifleri ve işletmeniz için tedarik talepleri için bizimle iletişime geçin.</h2>
+  <a href="javascript:void(0)" onclick="openBasvuruForm()" class="btn btn-solid">Bizimle Çalışın</a>
 </section>
 
 <footer id="iletisim">
@@ -546,6 +612,48 @@
   </div>
 </footer>
 
+<!-- Başvuru Formu Modal -->
+<div class="modal-overlay" id="basvuruModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBasvuruForm()" aria-label="Kapat">&times;</button>
+    <h3>Bizimle Çalışın</h3>
+    <p class="modal-sub">Marka distribütörlüğü teklifiniz ya da işletmeniz için tedarik talebiniz için formu doldurun, size dönüş yapalım.</p>
+    <form id="basvuruFormEl" action="https://formspree.io/f/xrenpjll" method="POST">
+      <div class="form-group">
+        <label for="adSoyad">Ad Soyad</label>
+        <input type="text" id="adSoyad" name="Ad Soyad" required>
+      </div>
+      <div class="form-group">
+        <label for="isletmeAdi">İşletme Adı</label>
+        <input type="text" id="isletmeAdi" name="İşletme Adı" required>
+      </div>
+      <div class="form-group">
+        <label for="telefon">Telefon</label>
+        <input type="tel" id="telefon" name="Telefon" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="E-posta" required>
+      </div>
+      <div class="form-group">
+        <label for="talepTuru">Talep Türü</label>
+        <select id="talepTuru" name="Talep Türü" required>
+          <option value="">Seçiniz</option>
+          <option value="Marka Distribütörlüğü Teklifi">Marka Distribütörlüğü Teklifi</option>
+          <option value="İşletmem İçin Tedarik Talebi">İşletmem İçin Tedarik Talebi</option>
+          <option value="Diğer">Diğer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mesaj">Mesajınız</label>
+        <textarea id="mesaj" name="Mesaj"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Gönder</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</div>
+
 <script>
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
@@ -557,6 +665,35 @@
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
   }, {threshold:0.15});
   reveals.forEach(el => io.observe(el));
+
+  function openBasvuruForm(){
+    document.getElementById('basvuruModal').classList.add('open');
+  }
+  function closeBasvuruForm(){
+    document.getElementById('basvuruModal').classList.remove('open');
+  }
+
+  const basvuruForm = document.getElementById('basvuruFormEl');
+  basvuruForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const statusEl = document.getElementById('formStatus');
+    const data = new FormData(basvuruForm);
+    statusEl.textContent = 'Gönderiliyor...';
+    fetch(basvuruForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if(response.ok){
+        statusEl.textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
+        basvuruForm.reset();
+      } else {
+        statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
+      }
+    }).catch(() => {
+      statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
+    });
+  });
 </script>
 
 </body>
