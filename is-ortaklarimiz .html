@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aker Global | İş Ortaklarımız</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0a09;
+    --bg-alt: #141210;
+    --panel: #1b1815;
+    --gold: #c9a24a;
+    --gold-light: #e8cd85;
+    --gold-dim: #8a6f34;
+    --cream: #f2ead9;
+    --cream-dim: #b7ac97;
+    --line: rgba(201,162,74,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.32em;
+    font-size:0.72rem;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 48px;
+    background:linear-gradient(to bottom, rgba(11,10,9,0.9), transparent);
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(11,10,9,0.92);
+    backdrop-filter:blur(10px);
+    padding:16px 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;
+    letter-spacing:0.08em;
+    color:var(--cream);
+  }
+  .logo span{color:var(--gold);}
+  .logo-img{height:38px;width:auto;display:block;}
+  .footer-brand .logo-img{height:44px;}
+  nav ul{display:flex;gap:40px;list-style:none;}
+  nav a{
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--cream-dim);
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a:hover{color:var(--gold-light);}
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--gold);transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;}
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:140px 24px 80px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(201,162,74,0.10), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    overflow:hidden;
+  }
+  .hero-deer{
+    position:absolute;
+    top:50%;left:50%;
+    width:min(1100px, 150vw);
+    transform:translate(-50%,-46%);
+    opacity:0.3;
+    pointer-events:none;
+  }
+  .hero-deer path,.hero-deer line{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.1;
+  }
+  .hero-content{position:relative;z-index:2;max-width:760px;}
+  .hero .eyebrow{display:block;margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6.5vw, 5.2rem);
+    line-height:1.05;
+    color:var(--cream);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-light);
+  }
+  .hero-sub{
+    margin:26px auto 0;
+    max-width:560px;
+    color:var(--cream-dim);
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+  .hero-cta{
+    margin-top:44px;
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:15px 34px;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    border:1px solid var(--gold);
+    transition:all .3s ease;
+  }
+  .btn-solid{
+    background:var(--gold);
+    color:var(--bg);
+  }
+  .btn-solid:hover{background:var(--gold-light);border-color:var(--gold-light);}
+  .btn-ghost{color:var(--cream);}
+  .btn-ghost:hover{background:rgba(201,162,74,0.1);color:var(--gold-light);}
+
+  .scroll-cue{
+    position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
+    width:1px;height:56px;
+    background:linear-gradient(to bottom, transparent, var(--gold));
+    z-index:2;
+  }
+  .scroll-cue::after{
+    content:'';position:absolute;bottom:0;left:-2.5px;width:6px;height:6px;
+    border-radius:50%;background:var(--gold-light);
+    animation:driptrail 2.2s ease-in-out infinite;
+  }
+  @keyframes driptrail{0%{bottom:0;opacity:0;}30%{opacity:1;}100%{bottom:56px;opacity:0;}}
+
+  section{padding:120px 0;position:relative;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 64px;}
+  .section-head .eyebrow{display:block;margin-bottom:16px;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem);color:var(--cream);}
+  .section-head p{color:var(--cream-dim);margin-top:16px;line-height:1.7;font-size:0.98rem;}
+  .divider{
+    width:64px;height:1px;background:var(--gold-dim);
+    margin:20px auto 0;
+  }
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .services{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:100px 0;}
+  .services .section-head{margin-bottom:56px;}
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .service-item{
+    padding:56px 40px;
+    text-align:center;
+    border-right:1px solid var(--line);
+  }
+  .service-item:last-child{border-right:none;}
+  .service-icon{
+    width:44px;height:44px;margin:0 auto 20px;
+  }
+  .service-icon svg{width:100%;height:100%;stroke:var(--gold);fill:none;stroke-width:1.1;}
+  .service-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:0.85rem;
+    color:var(--gold-dim);
+    letter-spacing:0.3em;
+    margin-bottom:14px;
+    display:block;
+  }
+  .service-item h3{font-size:1.5rem;color:var(--cream);margin-bottom:12px;}
+  .service-item p{color:var(--cream-dim);font-size:0.9rem;line-height:1.65;}
+
+  .story{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .story-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    background:var(--panel);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .story-visual svg{width:46%;opacity:0.85;}
+  .story-kenburns{
+    transform:scale(1) translate(0,0);
+    transform-origin:center center;
+  }
+  .story.in .story-kenburns{
+    animation:kenburns 16s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.14) translate(-2%,1.5%);}
+  }
+  .story-visual::before{
+    content:'';position:absolute;inset:14px;
+    border:1px solid var(--gold-dim);
+    pointer-events:none;
+  }
+  .story-text .eyebrow{display:block;margin-bottom:18px;}
+  .story-text h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--cream);margin-bottom:22px;}
+  .story-text p{color:var(--cream-dim);line-height:1.8;font-size:0.98rem;margin-bottom:16px;}
+  .story-stats{display:flex;gap:48px;margin-top:36px;flex-wrap:wrap;}
+  .story-stats div strong{
+    display:block;font-family:'Cormorant Garamond',serif;
+    font-size:2.2rem;color:var(--gold-light);
+  }
+  .story-stats div span{font-size:0.78rem;letter-spacing:0.08em;color:var(--cream-dim);text-transform:uppercase;}
+
+  .portfolio{background:var(--bg-alt);}
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .portfolio-card{
+    background:var(--bg-alt);
+    padding:56px 34px;
+    text-align:center;
+    transition:background .3s ease;
+  }
+  .portfolio-card:hover{background:var(--panel);}
+  .portfolio-tag{
+    font-size:0.7rem;text-transform:uppercase;letter-spacing:0.16em;
+    color:var(--gold-dim);margin-bottom:14px;display:block;
+  }
+  .portfolio-card h3{font-size:1.5rem;color:var(--cream);margin-bottom:12px;}
+  .portfolio-card p{color:var(--cream-dim);font-size:0.88rem;line-height:1.6;}
+  .portfolio-card.future{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:1px dashed var(--gold-dim);
+  }
+  .portfolio-card.future h3{color:var(--gold-dim);}
+
+  .audience-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+  }
+  .audience-item{
+    text-align:center;
+    padding:38px 20px;
+    border:1px solid var(--line);
+  }
+  .audience-item svg{width:34px;height:34px;stroke:var(--gold-dim);fill:none;stroke-width:1.2;margin-bottom:16px;}
+  .audience-item h4{font-size:1rem;color:var(--cream);font-weight:400;letter-spacing:0.02em;}
+
+  .cta-band{
+    background:var(--panel);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:center;
+    padding:100px 24px;
+  }
+  .cta-band .eyebrow{display:block;margin-bottom:18px;}
+  .cta-band h2{font-size:clamp(1.9rem,4vw,2.6rem);color:var(--cream);max-width:640px;margin:0 auto 34px;}
+
+  footer{padding:70px 0 36px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:48px;
+    padding-bottom:48px;
+    border-bottom:1px solid var(--line);
+  }
+  .footer-brand .logo{margin-bottom:16px;display:block;}
+  .footer-brand p{color:var(--cream-dim);font-size:0.88rem;line-height:1.7;max-width:280px;}
+  .footer-col h5{
+    font-size:0.75rem;text-transform:uppercase;letter-spacing:0.16em;
+    color:var(--gold);margin-bottom:20px;font-weight:500;
+  }
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:12px;}
+  .footer-col a{color:var(--cream-dim);font-size:0.9rem;transition:color .2s;}
+  .footer-col a:hover{color:var(--gold-light);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:28px;flex-wrap:wrap;gap:12px;
+  }
+  .footer-bottom p{color:var(--cream-dim);font-size:0.8rem;}
+
+  @media (max-width:900px){
+    header{padding:18px 24px;}
+    nav ul{display:none;}
+    .nav-toggle{display:block;}
+    .story{grid-template-columns:1fr;gap:44px;}
+    .services-grid{grid-template-columns:1fr;}
+    .service-item{border-right:none;border-bottom:1px solid var(--line);}
+    .service-item:last-child{border-bottom:none;}
+    .portfolio-grid{grid-template-columns:1fr;}
+    .audience-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .audience-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-cta{flex-direction:column;align-items:center;}
+  }
+
+  /* ---------- APPLICATION FORM MODAL ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(6,5,4,0.82);
+    backdrop-filter:blur(4px);
+    align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    position:relative;
+    width:100%;max-width:520px;
+    max-height:88vh;
+    overflow-y:auto;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    padding:44px 36px;
+  }
+  .modal-close{
+    position:absolute;top:18px;right:18px;
+    background:none;border:none;
+    color:var(--cream-dim);
+    font-size:1.6rem;line-height:1;
+    cursor:pointer;
+  }
+  .modal-close:hover{color:var(--gold-light);}
+  .modal-box h3{font-size:1.7rem;color:var(--cream);margin-bottom:8px;}
+  .modal-box .modal-sub{color:var(--cream-dim);font-size:0.9rem;margin-bottom:28px;line-height:1.6;}
+  .form-group{margin-bottom:18px;}
+  .form-group label{
+    display:block;font-size:0.72rem;text-transform:uppercase;
+    letter-spacing:0.12em;color:var(--gold);margin-bottom:8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea{
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:12px 14px;
+    font-family:'Jost',sans-serif;
+    font-size:0.92rem;
+    outline:none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus{border-color:var(--gold);}
+  .form-group textarea{resize:vertical;min-height:90px;}
+  .form-submit{
+    width:100%;
+    background:var(--gold);
+    color:var(--bg);
+    border:1px solid var(--gold);
+    padding:15px;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    cursor:pointer;
+    margin-top:8px;
+    transition:background .3s ease;
+  }
+  .form-submit:hover{background:var(--gold-light);}
+  .form-status{margin-top:16px;font-size:0.88rem;text-align:center;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a href="index.html" class="logo"><img src="IMG_1436.png" alt="Aker Global" class="logo-img"></a>
+  <nav>
+    <ul>
+      <li><a href="index.html#anasayfa">Ana Sayfa</a></li>
+      <li><a href="index.html#hizmetler">Hizmetlerimiz</a></li>
+      <li><a href="is-ortaklarimiz.html">İş Ortaklarımız</a></li>
+      <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
+      <li><a href="index.html#iletisim">İletişim</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-label="Menü">&#9776;</button>
+</header>
+
+<section class="hero" style="min-height:64vh;">
+  <svg class="hero-deer" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="var(--gold)" stroke-width="1" opacity="0.55">
+      <line x1="400" y1="260" x2="150" y2="120"/>
+      <line x1="400" y1="260" x2="660" y2="100"/>
+      <line x1="400" y1="260" x2="120" y2="400"/>
+      <line x1="400" y1="260" x2="690" y2="410"/>
+      <line x1="400" y1="260" x2="400" y2="60"/>
+    </g>
+    <g fill="var(--gold)" opacity="0.7">
+      <circle cx="150" cy="120" r="4"/>
+      <circle cx="660" cy="100" r="4"/>
+      <circle cx="120" cy="400" r="4"/>
+      <circle cx="690" cy="410" r="4"/>
+      <circle cx="400" cy="60" r="4"/>
+    </g>
+    <circle cx="400" cy="260" r="6" fill="var(--gold-light)"/>
+    <circle cx="400" cy="260" r="10" fill="none" stroke="var(--gold)" stroke-width="1">
+      <animate attributeName="r" values="10;60;10" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0;0.8" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.2s" repeatCount="indefinite" path="M400,260 L150,120"/></circle>
+    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.8s" repeatCount="indefinite" path="M400,260 L660,100"/></circle>
+    <circle r="3" fill="var(--gold-light)"><animateMotion dur="4.4s" repeatCount="indefinite" path="M400,260 L120,400"/></circle>
+    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.6s" repeatCount="indefinite" path="M400,260 L690,410"/></circle>
+    <circle r="3" fill="var(--gold-light)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M400,260 L400,60"/></circle>
+  </svg>
+  <div class="hero-content">
+    <span class="eyebrow">Kimlere Hizmet Veriyoruz</span>
+    <h1>İş <em>Ortaklarımız</em></h1>
+    <p class="hero-sub">Marmara Bölgesi'nde kafelerden toptancılara, farklı ölçekteki işletmelere depolama, lojistik ve distribütörlük altyapımızla güvenilir tedarik sağlıyoruz.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="audience-grid reveal" style="grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);">
+      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+        <svg viewBox="0 0 48 48"><path d="M10 20h28v6a14 14 0 0 1-14 14 14 14 0 0 1-14-14v-6Z"/><path d="M38 22h4a4 4 0 0 1 0 8h-4"/><path d="M16 12v6 M24 12v6 M32 12v6"/></svg>
+        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Kafeler</h4>
+        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Günlük düzenli teslimatlarla kafe işletmelerinin kahve ve tedarik ihtiyacını zamanında karşılıyoruz.</p>
+      </div>
+      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+        <svg viewBox="0 0 48 48"><path d="M8 16h32l-3 22H11L8 16Z"/><path d="M6 16 8 8h32l2 8"/><path d="M18 22v10 M30 22v10"/></svg>
+        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Marketler</h4>
+        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Raf düzenine uygun paketleme ve teslimatla market işletmelerinin stok sürekliliğini destekliyoruz.</p>
+      </div>
+      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+        <svg viewBox="0 0 48 48"><path d="M8 42V18l16-10 16 10v24"/><path d="M8 42h32"/><path d="M20 42V28h8v14"/></svg>
+        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Oteller</h4>
+        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Yüksek hacimli ve düzenli tedarik ihtiyacı olan otel işletmelerine güvenilir bir tedarik ortağıyız.</p>
+      </div>
+      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+        <svg viewBox="0 0 48 48"><rect x="8" y="16" width="24" height="20" rx="1"/><path d="M32 22h8v14h-8" /><circle cx="16" cy="40" r="2.4"/><circle cx="34" cy="40" r="2.4"/></svg>
+        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Tedarikçiler</h4>
+        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Distribütörlüğünü üstlendiğimiz markalarla güçlü ve uzun soluklu tedarik ortaklıkları kuruyoruz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band reveal" id="isbirligi">
+  <span class="eyebrow">Bizimle Çalışın</span>
+  <h2>Marka distribütörlüğü teklifleri ve işletmeniz için tedarik talepleri için bizimle iletişime geçin.</h2>
+  <a href="javascript:void(0)" onclick="openBasvuruForm()" class="btn btn-solid">Bizimle Çalışın</a>
+</section>
+
+<footer id="iletisim">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><img src="IMG_1436.png" alt="Aker Global" class="logo-img"></a>
+        <p>Marmara Bölgesi'nde lojistik, depolama ve distribütörlük hizmetleri sunuyoruz.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Kurumsal</h5>
+        <ul>
+          <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
+          <li><a href="index.html#hizmetler">Hizmetlerimiz</a></li>
+          <li><a href="is-ortaklarimiz.html">İş Ortaklarımız</a></li>
+          <li><a href="#isbirligi">İş Birliği</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>İletişim</h5>
+        <ul>
+          <li><a href="tel:+908508111633">0850 811 16 33</a></li>
+          <li><a href="mailto:sude.celik@akerglobal.com.tr">sude.celik@akerglobal.com.tr</a></li>
+          <li><a href="mailto:kerem.celik@akerglobal.com.tr">kerem.celik@akerglobal.com.tr</a></li>
+          <li><a href="mailto:adil.yayla@akerglobal.com.tr">adil.yayla@akerglobal.com.tr</a></li>
+          <li><a href="mailto:yagmur.fettahoglu@akerglobal.com.tr">yagmur.fettahoglu@akerglobal.com.tr</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Adres &amp; Sosyal</h5>
+        <ul>
+          <li><a href="#">Mimar Sinan Mh. Cendere Yolu Sk. No:36/1<br>Eyüpsultan/İstanbul</a></li>
+          <li><a href="https://instagram.com/akerglobal" target="_blank" rel="noopener">Instagram @akerglobal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aker Global. Tüm hakları saklıdır.</p>
+      <p>Venado Coffee Marmara Bölgesi Yetkili Distribütörü</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Başvuru Formu Modal -->
+<div class="modal-overlay" id="basvuruModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBasvuruForm()" aria-label="Kapat">&times;</button>
+    <h3>Bizimle Çalışın</h3>
+    <p class="modal-sub">Marka distribütörlüğü teklifiniz ya da işletmeniz için tedarik talebiniz için formu doldurun, size dönüş yapalım.</p>
+    <form id="basvuruFormEl" action="https://formspree.io/f/xrenpjll" method="POST">
+      <div class="form-group">
+        <label for="adSoyad">Ad Soyad</label>
+        <input type="text" id="adSoyad" name="Ad Soyad" required>
+      </div>
+      <div class="form-group">
+        <label for="isletmeAdi">İşletme Adı</label>
+        <input type="text" id="isletmeAdi" name="İşletme Adı" required>
+      </div>
+      <div class="form-group">
+        <label for="telefon">Telefon</label>
+        <input type="tel" id="telefon" name="Telefon" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="E-posta" required>
+      </div>
+      <div class="form-group">
+        <label for="talepTuru">Talep Türü</label>
+        <select id="talepTuru" name="Talep Türü" required>
+          <option value="">Seçiniz</option>
+          <option value="Marka Distribütörlüğü Teklifi">Marka Distribütörlüğü Teklifi</option>
+          <option value="İşletmem İçin Tedarik Talebi">İşletmem İçin Tedarik Talebi</option>
+          <option value="Diğer">Diğer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mesaj">Mesajınız</label>
+        <textarea id="mesaj" name="Mesaj"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Gönder</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  reveals.forEach(el => io.observe(el));
+
+  function openBasvuruForm(){
+    document.getElementById('basvuruModal').classList.add('open');
+  }
+  function closeBasvuruForm(){
+    document.getElementById('basvuruModal').classList.remove('open');
+  }
+
+  const basvuruForm = document.getElementById('basvuruFormEl');
+  basvuruForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const statusEl = document.getElementById('formStatus');
+    const data = new FormData(basvuruForm);
+    statusEl.textContent = 'Gönderiliyor...';
+    fetch(basvuruForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if(response.ok){
+        statusEl.textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
+        basvuruForm.reset();
+      } else {
+        statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
+      }
+    }).catch(() => {
+      statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
+    });
+  });
+</script>
+
+</body>
+</html>
