@@ -176,11 +176,13 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
 
-  .services{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .services{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:100px 0;}
+  .services .section-head{margin-bottom:56px;}
   .services-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:0;
+    border-top:1px solid var(--line);
   }
   .service-item{
     padding:56px 40px;
@@ -472,30 +474,32 @@
 </section>
 
 <section class="services reveal" id="hizmetler">
-  <div class="wrap services-grid">
-    <div class="service-item">
-      <span class="service-num">01</span>
-      <div class="service-icon">
-        <svg viewBox="0 0 48 48"><path d="M6 18 24 8l18 10v20a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V18Z"/><path d="M16 40V24h16v16"/></svg>
-      </div>
-      <h3>Depolama</h3>
-      <p>Modern raf sistemleri ve 7/24 güvenlik ile ürünleriniz emin ellerde saklanır.</p>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ne Yapıyoruz</span>
+      <h2>Distribütörlük İşimiz</h2>
+      <p>Marmara Bölgesi'nde markaların satış ve dağıtım ağını yönetiyoruz. Bunu kendi depolama ve lojistik altyapımızla, uçtan uca kendimiz sağlıyoruz.</p>
+      <div class="divider"></div>
     </div>
-    <div class="service-item">
-      <span class="service-num">02</span>
-      <div class="service-icon">
-        <svg viewBox="0 0 48 48"><path d="M4 32V14h24v18"/><path d="M28 22h10l6 8v6a2 2 0 0 1-2 2h-2"/><circle cx="14" cy="38" r="4"/><circle cx="36" cy="38" r="4"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 18 24 8l18 10v20a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V18Z"/><path d="M16 40V24h16v16"/></svg>
+        </div>
+        <h3>Depolama</h3>
+        <p>Modern raf sistemleri ve 7/24 güvenlikle, distribütörlüğünü yaptığımız ürünleri emin ellerde saklıyoruz.</p>
       </div>
-      <h3>Lojistik</h3>
-      <p>Geniş araç filomuz ve uzman şoför kadromuzla zamanında, güvenli teslimat.</p>
-    </div>
-    <div class="service-item">
-      <span class="service-num">03</span>
-      <div class="service-icon">
-        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 7v34 M7 24h34"/><path d="M24 7c6 5 9 11 9 17s-3 12-9 17 M24 7c-6 5-9 11-9 17s3 12 9 17"/></svg>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M4 32V14h24v18"/><path d="M28 22h10l6 8v6a2 2 0 0 1-2 2h-2"/><circle cx="14" cy="38" r="4"/><circle cx="36" cy="38" r="4"/></svg>
+        </div>
+        <h3>Lojistik</h3>
+        <p>Geniş araç filomuz ve uzman şoför kadromuzla, distribütörlüğünü yaptığımız ürünleri zamanında ve güvenle teslim ediyoruz.</p>
       </div>
-      <h3>Distribütörlük</h3>
-      <p>Marmara Bölgesi'nde markaların satış ve dağıtım ağını yönetiyoruz.</p>
     </div>
   </div>
 </section>
