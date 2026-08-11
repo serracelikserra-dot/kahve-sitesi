@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aker Global | Referanslarımız</title>
+<title>Aker Global | Lojistik, Depolama ve Distribütörlük</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -408,21 +408,22 @@
 <body>
 
 <header id="siteHeader">
-  <a href="index.html" class="logo"><img src="IMG_1436.png" alt="Aker Global" class="logo-img"></a>
+  <a href="#" class="logo"><img src="IMG_1436.png" alt="Aker Global" class="logo-img"></a>
   <nav>
     <ul>
-      <li><a href="index.html#anasayfa">Ana Sayfa</a></li>
-      <li><a href="index.html#hizmetler">Hizmetlerimiz</a></li>
+      <li><a href="#anasayfa">Ana Sayfa</a></li>
+      <li><a href="#hizmetler">Hizmetlerimiz</a></li>
       <li><a href="is-ortaklarimiz.html">Referanslarımız</a></li>
-      <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
-      <li><a href="index.html#iletisim">İletişim</a></li>
+      <li><a href="#hakkimizda">Hakkımızda</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
     </ul>
   </nav>
   <button class="nav-toggle" aria-label="Menü">&#9776;</button>
 </header>
 
-<section class="hero" style="min-height:64vh;">
+<section class="hero" id="anasayfa">
   <svg class="hero-deer" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg">
+    <!-- connection lines from hub to distribution points -->
     <g stroke="var(--gold)" stroke-width="1" opacity="0.55">
       <line x1="400" y1="260" x2="150" y2="120"/>
       <line x1="400" y1="260" x2="660" y2="100"/>
@@ -430,6 +431,7 @@
       <line x1="400" y1="260" x2="690" y2="410"/>
       <line x1="400" y1="260" x2="400" y2="60"/>
     </g>
+    <!-- outer node markers -->
     <g fill="var(--gold)" opacity="0.7">
       <circle cx="150" cy="120" r="4"/>
       <circle cx="660" cy="100" r="4"/>
@@ -437,47 +439,149 @@
       <circle cx="690" cy="410" r="4"/>
       <circle cx="400" cy="60" r="4"/>
     </g>
+    <!-- central hub with pulsing rings -->
     <circle cx="400" cy="260" r="6" fill="var(--gold-light)"/>
     <circle cx="400" cy="260" r="10" fill="none" stroke="var(--gold)" stroke-width="1">
       <animate attributeName="r" values="10;60;10" dur="4s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0.8;0;0.8" dur="4s" repeatCount="indefinite"/>
     </circle>
-    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.2s" repeatCount="indefinite" path="M400,260 L150,120"/></circle>
-    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.8s" repeatCount="indefinite" path="M400,260 L660,100"/></circle>
-    <circle r="3" fill="var(--gold-light)"><animateMotion dur="4.4s" repeatCount="indefinite" path="M400,260 L120,400"/></circle>
-    <circle r="3" fill="var(--gold-light)"><animateMotion dur="3.6s" repeatCount="indefinite" path="M400,260 L690,410"/></circle>
-    <circle r="3" fill="var(--gold-light)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M400,260 L400,60"/></circle>
+    <!-- moving pulse dots traveling along each route -->
+    <circle r="3" fill="var(--gold-light)">
+      <animateMotion dur="3.2s" repeatCount="indefinite" path="M400,260 L150,120"/>
+    </circle>
+    <circle r="3" fill="var(--gold-light)">
+      <animateMotion dur="3.8s" repeatCount="indefinite" path="M400,260 L660,100"/>
+    </circle>
+    <circle r="3" fill="var(--gold-light)">
+      <animateMotion dur="4.4s" repeatCount="indefinite" path="M400,260 L120,400"/>
+    </circle>
+    <circle r="3" fill="var(--gold-light)">
+      <animateMotion dur="3.6s" repeatCount="indefinite" path="M400,260 L690,410"/>
+    </circle>
+    <circle r="3" fill="var(--gold-light)">
+      <animateMotion dur="2.8s" repeatCount="indefinite" path="M400,260 L400,60"/>
+    </circle>
   </svg>
   <div class="hero-content">
-    <span class="eyebrow">Kimlere Hizmet Veriyoruz</span>
-    <h1>Referanslarımız</h1>
-    <p class="hero-sub">Marmara Bölgesi'nde kafelerden toptancılara, farklı ölçekteki işletmelere depolama, lojistik ve distribütörlük altyapımızla güvenilir tedarik sağlıyoruz.</p>
+    <span class="eyebrow">Aker Global</span>
+    <h1>Marmara'nın Güvenilir <em>Lojistik</em> ve Dağıtım Ortağı</h1>
+    <p class="hero-sub">Depolama, taşımacılık ve distribütörlük hizmetlerimizle markaları doğru zamanda, doğru yerde buluşturuyoruz. Marmara Bölgesi'nde Venado Coffee'nin yetkili distribütörüyüz.</p>
+    <div class="hero-cta">
+      <a href="#hizmetler" class="btn btn-solid">Hizmetlerimiz</a>
+      <a href="javascript:void(0)" onclick="openBasvuruForm()" class="btn btn-ghost">Bizimle Çalışın</a>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+
+<section class="services reveal" id="hizmetler">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ne Yapıyoruz</span>
+      <h2>Distribütörlük</h2>
+      <p>Marmara Bölgesi'nde markaların satış ve dağıtım ağını yönetiyoruz. Bunu kendi depolama ve lojistik altyapımızla, uçtan uca kendimiz sağlıyoruz.</p>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 18 24 8l18 10v20a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V18Z"/><path d="M16 40V24h16v16"/></svg>
+        </div>
+        <h3>Depolama</h3>
+        <p>Modern raf sistemleri ve 7/24 güvenlikle, distribütörlüğünü yaptığımız ürünleri emin ellerde saklıyoruz.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M4 32V14h24v18"/><path d="M28 22h10l6 8v6a2 2 0 0 1-2 2h-2"/><circle cx="14" cy="38" r="4"/><circle cx="36" cy="38" r="4"/></svg>
+        </div>
+        <h3>Lojistik</h3>
+        <p>Geniş araç filomuz ve uzman şoför kadromuzla, distribütörlüğünü yaptığımız ürünleri zamanında ve güvenle teslim ediyoruz.</p>
+      </div>
+    </div>
   </div>
 </section>
 
+<section id="hakkimizda">
+  <div class="wrap story reveal">
+    <div class="story-visual">
+      <img src="aker-global-depo-sahne-2.png" alt="Aker Global" class="story-kenburns" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+    </div>
+    <div class="story-text">
+      <span class="eyebrow">Hakkımızda</span>
+      <h2>Depolamadan dağıtıma,<br>Marmara'nın güvenilir adresi.</h2>
+      <p>Aker Global olarak Marmara Bölgesi'nde lojistik, depolama ve distribütörlük hizmetleri sunuyoruz. Şu anda Venado Coffee markasının bölgesel distribütörlüğünü yürütüyoruz.</p>
+      <p>Hedefimiz büyümek: güçlü depolama altyapımız ve lojistik ağımızla önümüzdeki dönemde portföyümüze yeni marka distribütörlükleri eklemek istiyoruz.</p>
+      <div class="story-stats">
+        <div><strong>Marmara</strong><span>Bölgesi</span></div>
+        <div><strong>7/24</strong><span>Güvenlik</span></div>
+        <div><strong>+1</strong><span>Büyüyen Portföy</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Marka Portföyümüz</span>
+      <h2>Distribütörlüğünü Yaptığımız Markalar</h2>
+      <p>Marmara Bölgesi'nde temsil ettiğimiz markalar ve büyüyen portföyümüz.</p>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-card">
+        <span class="portfolio-tag">Marmara Distribütörü</span>
+        <h3>Venado Coffee</h3>
+        <p>Venado Coffee markasının Marmara Bölgesi'ndeki yetkili distribütörüyüz.</p>
+      </div>
+      <div class="portfolio-card">
+        <span class="portfolio-tag">Marmara Distribütörü</span>
+        <h3>Karaca Hatır</h3>
+        <p>Karaca Hatır markasının Marmara Bölgesi'ndeki yetkili distribütörüyüz.</p>
+      </div>
+      <div class="portfolio-card future" onclick="openBasvuruForm()" style="cursor:pointer;">
+        <span class="portfolio-tag">İş Birliği</span>
+        <h3>Sizin Markanız mı?</h3>
+        <p>Marmara'da güçlü bir distribütörlük ortağı arıyorsanız bizimle iletişime geçin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section>
   <div class="wrap">
-    <div class="audience-grid reveal" style="grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);">
-      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kimlere Hizmet Veriyoruz</span>
+      <h2>Referanslarımız</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="audience-item">
         <svg viewBox="0 0 48 48"><path d="M10 20h28v6a14 14 0 0 1-14 14 14 14 0 0 1-14-14v-6Z"/><path d="M38 22h4a4 4 0 0 1 0 8h-4"/><path d="M16 12v6 M24 12v6 M32 12v6"/></svg>
-        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Kafeler</h4>
-        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Günlük düzenli teslimatlarla kafe işletmelerinin kahve ve tedarik ihtiyacını zamanında karşılıyoruz.</p>
+        <h4>Kafeler</h4>
       </div>
-      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+      <a href="marketlerimiz.html" class="audience-item" style="display:block;cursor:pointer;">
         <svg viewBox="0 0 48 48"><path d="M8 16h32l-3 22H11L8 16Z"/><path d="M6 16 8 8h32l2 8"/><path d="M18 22v10 M30 22v10"/></svg>
-        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Marketler</h4>
-        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Raf düzenine uygun paketleme ve teslimatla market işletmelerinin stok sürekliliğini destekliyoruz.</p>
-      </div>
-      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+        <h4>Marketler</h4>
+      </a>
+      <div class="audience-item">
         <svg viewBox="0 0 48 48"><path d="M8 42V18l16-10 16 10v24"/><path d="M8 42h32"/><path d="M20 42V28h8v14"/></svg>
-        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Oteller</h4>
-        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Yüksek hacimli ve düzenli tedarik ihtiyacı olan otel işletmelerine güvenilir bir tedarik ortağıyız.</p>
+        <h4>Oteller</h4>
       </div>
-      <div class="audience-item" style="border:none;background:var(--bg);text-align:left;padding:44px;">
+      <div class="audience-item">
         <svg viewBox="0 0 48 48"><rect x="8" y="16" width="24" height="20" rx="1"/><path d="M32 22h8v14h-8" /><circle cx="16" cy="40" r="2.4"/><circle cx="34" cy="40" r="2.4"/></svg>
-        <h4 style="font-size:1.3rem;margin:16px 0 10px;">Tedarikçiler</h4>
-        <p style="color:var(--cream-dim);font-size:0.9rem;line-height:1.7;">Distribütörlüğünü üstlendiğimiz markalarla güçlü ve uzun soluklu tedarik ortaklıkları kuruyoruz.</p>
+        <h4>Tedarikçiler</h4>
       </div>
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:56px;">
+      <a href="is-ortaklarimiz.html" class="btn btn-ghost">Tümünü Gör</a>
     </div>
   </div>
 </section>
@@ -498,8 +602,8 @@
       <div class="footer-col">
         <h5>Kurumsal</h5>
         <ul>
-          <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
-          <li><a href="index.html#hizmetler">Hizmetlerimiz</a></li>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#hizmetler">Hizmetlerimiz</a></li>
           <li><a href="is-ortaklarimiz.html">Referanslarımız</a></li>
           <li><a href="#isbirligi">İş Birliği</a></li>
         </ul>
@@ -535,7 +639,8 @@
     <button class="modal-close" onclick="closeBasvuruForm()" aria-label="Kapat">&times;</button>
     <h3>Bizimle Çalışın</h3>
     <p class="modal-sub">Marka distribütörlüğü teklifiniz ya da işletmeniz için tedarik talebiniz için formu doldurun, size dönüş yapalım.</p>
-    <form id="basvuruFormEl" action="https://formspree.io/f/xrenpjll" method="POST">
+    <form id="basvuruFormEl" action="https://formspree.io/f/mdenggjr" method="POST">
+      <input type="hidden" name="_next" value="https://serracelikserra-dot.github.io/kahve-sitesi/?basvuru=basarili">
       <div class="form-group">
         <label for="adSoyad">Ad Soyad</label>
         <input type="text" id="adSoyad" name="Ad Soyad" required>
@@ -590,27 +695,12 @@
     document.getElementById('basvuruModal').classList.remove('open');
   }
 
-  const basvuruForm = document.getElementById('basvuruFormEl');
-  basvuruForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const statusEl = document.getElementById('formStatus');
-    const data = new FormData(basvuruForm);
-    statusEl.textContent = 'Gönderiliyor...';
-    fetch(basvuruForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if(response.ok){
-        statusEl.textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
-        basvuruForm.reset();
-      } else {
-        statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
-      }
-    }).catch(() => {
-      statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
-    });
-  });
+  // Formu doldurduktan sonra siteye geri dönüldüğünde teşekkür mesajı göster
+  if (window.location.search.includes('basvuru=basarili')) {
+    openBasvuruForm();
+    document.getElementById('basvuruFormEl').style.display = 'none';
+    document.getElementById('formStatus').textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
+  }
 </script>
 
 </body>
