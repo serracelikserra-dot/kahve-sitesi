@@ -639,7 +639,8 @@
     <button class="modal-close" onclick="closeBasvuruForm()" aria-label="Kapat">&times;</button>
     <h3>Bizimle Çalışın</h3>
     <p class="modal-sub">Marka distribütörlüğü teklifiniz ya da işletmeniz için tedarik talebiniz için formu doldurun, size dönüş yapalım.</p>
-    <form id="basvuruFormEl" action="https://formspree.io/f/xrenpjll" method="POST">
+    <form id="basvuruFormEl" action="https://formspree.io/f/mdenggjr" method="POST">
+      <input type="hidden" name="_next" value="https://serracelikserra-dot.github.io/kahve-sitesi/?basvuru=basarili">
       <div class="form-group">
         <label for="adSoyad">Ad Soyad</label>
         <input type="text" id="adSoyad" name="Ad Soyad" required>
@@ -694,27 +695,12 @@
     document.getElementById('basvuruModal').classList.remove('open');
   }
 
-  const basvuruForm = document.getElementById('basvuruFormEl');
-  basvuruForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const statusEl = document.getElementById('formStatus');
-    const data = new FormData(basvuruForm);
-    statusEl.textContent = 'Gönderiliyor...';
-    fetch(basvuruForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if(response.ok){
-        statusEl.textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
-        basvuruForm.reset();
-      } else {
-        statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
-      }
-    }).catch(() => {
-      statusEl.textContent = 'Bir sorun oluştu, lütfen tekrar deneyin.';
-    });
-  });
+  // Formu doldurduktan sonra siteye geri dönüldüğünde teşekkür mesajı göster
+  if (window.location.search.includes('basvuru=basarili')) {
+    openBasvuruForm();
+    document.getElementById('basvuruFormEl').style.display = 'none';
+    document.getElementById('formStatus').textContent = 'Talebiniz alındı, en kısa sürede dönüş yapacağız.';
+  }
 </script>
 
 </body>
